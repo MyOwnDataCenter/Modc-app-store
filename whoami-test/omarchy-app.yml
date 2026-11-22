@@ -1,0 +1,17 @@
+manifestVersion: 1
+id: whoami-test
+name: "Whoami (review test)"
+tagline: "A tiny page that shows the request it received"
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/traefik.png
+category: developer
+version: "1.10.3"
+port: 4377
+web:
+  service: web
+  port: 80
+description: >-
+  A test submission for the review flow. Not for the store.
+developer: "Traefik Labs"
+website: https://github.com/traefik/whoami
+repo: https://github.com/traefik/whoami
+submitter: "TouchWorkStation"
