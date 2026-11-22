@@ -40,13 +40,16 @@ Every app here:
 
 ## How review works
 
-1. Your pull request's checks must pass.
-2. A maintainer reads the compose file and listing, installs the app on a test server, and opens it.
-3. We'll comment with anything that needs changing, then merge. It appears in everyone's App Store within an hour, or
-   right away with **Check for new apps** (the arrow at the top of the App Store).
+Nothing is live until a maintainer approves it.
+
+1. Your pull request is labelled **pending review**, and a comment gives you a link to try it on your own server.
+2. The checks must pass.
+3. A maintainer reads the files, installs the app on a test server from your pull request, and then either
+   **approves** it (it's merged and live in every App Store within the hour), **asks for changes**, or
+   **declines** it with the reason. You're thanked and told why either way.
 
 Apps that stay healthy and are widely used are offered a move to the official store, with your credit kept in the
-listing.
+listing. Maintainers: see [REVIEWING.md](REVIEWING.md).
 
 ## Removing an app
 

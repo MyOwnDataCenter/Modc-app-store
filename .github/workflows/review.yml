@@ -1,0 +1,126 @@
+name: Review
+
+# Every submission waits for a maintainer before it goes live (an app is live once it's on main).
+#
+# A new pull request is labelled "pending review" and gets a comment with a link that installs it on an
+# Omarchy Server exactly as submitted. A maintainer (write access or more) then comments:
+#   /approve            merges it, once the checks have passed: it's in every App Store within the hour
+#   /changes <what>     asks the submitter for changes
+#   /deny <why>         closes it, with the reason
+# On a submission form (an issue): /accept, /changes <what>, /deny <why>.
+#
+# This never checks out or runs anything from a pull request: it only reads it and comments through the API.
+on:
+  pull_request_target:
+    types: [opened, reopened]
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  checks: read
+
+concurrency:
+  group: review-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  welcome:
+    if: github.event_name == 'pull_request_target' || github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const item = context.payload.pull_request ?? context.payload.issue
+            const isPr = !!context.payload.pull_request
+            const {owner, repo} = context.repo
+            // Only submissions: pull requests, and issues opened from the Submit an app form.
+            if (!isPr && !(item.labels ?? []).some((l) => l.name === 'submission')) return
+            await github.rest.issues.addLabels({owner, repo, issue_number: item.number, labels: ['pending review']})
+            const link = `https://github.com/${owner}/${repo}/pull/${item.number}`
+            const body = isPr
+              ? [
+                  `Thanks for submitting an app, @${item.user.login}! 🎉`,
+                  '',
+                  'Here’s what happens next:',
+                  '1. The checks run on your pull request. If one fails, its log says what to change.',
+                  '2. A maintainer reviews the files and installs the app on a test server.',
+                  '3. It’s approved and goes live in every App Store, or we’ll say what needs changing.',
+                  '',
+                  `**To try it on your own Omarchy Server:** App Store › Stores › **Add by link**, paste \`${link}\`, then install the app. Remove that store again when you’re done.`,
+                ].join('\n')
+              : [
+                  `Thanks for submitting an app, @${item.user.login}! 🎉`,
+                  '',
+                  'A maintainer will look at it. If it’s a good fit, we’ll package it and open a pull request, and you’ll be credited as the submitter.',
+                ].join('\n')
+            await github.rest.issues.createComment({owner, repo, issue_number: item.number, body})
+
+  command:
+    if: github.event_name == 'issue_comment' && startsWith(github.event.comment.body, '/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo
+            const issue = context.payload.issue
+            const number = issue.number
+            const isPr = !!issue.pull_request
+            const actor = context.payload.comment.user.login
+            const [cmd] = context.payload.comment.body.trim().split(/\s+/)
+            const reason = context.payload.comment.body.trim().slice(cmd.length).trim()
+            const known = isPr ? ['/approve', '/changes', '/deny'] : ['/accept', '/changes', '/deny']
+            if (!known.includes(cmd)) return
+            const say = (body) => github.rest.issues.createComment({owner, repo, issue_number: number, body})
+            const label = async (add, remove = []) => {
+              for (const name of remove) await github.rest.issues.removeLabel({owner, repo, issue_number: number, name}).catch(() => {})
+              if (add) await github.rest.issues.addLabels({owner, repo, issue_number: number, labels: [add]})
+            }
+
+            // Only maintainers decide.
+            const {data: perm} = await github.rest.repos.getCollaboratorPermissionLevel({owner, repo, username: actor})
+            if (!['admin', 'maintain', 'write'].includes(perm.permission)) {
+              await say(`Sorry @${actor}, only a maintainer can use \`${cmd}\`.`)
+              return
+            }
+            if (issue.state !== 'open') return say(`This one is already closed.`)
+            const submitter = issue.user.login
+            const pending = ['pending review', 'changes requested']
+
+            if (cmd === '/changes') {
+              if (!reason) return say('Add what needs changing after `/changes`.')
+              await label('changes requested', ['pending review'])
+              return say(`Thanks @${submitter}! Before this can go live, please change:\n\n${reason}\n\nPush the changes${isPr ? ' to this pull request' : ''} and we’ll take another look.`)
+            }
+
+            if (cmd === '/deny') {
+              if (!reason) return say('Add the reason after `/deny`; it’s shown to the submitter.')
+              await label('denied', pending)
+              await say(`Thank you for submitting this, @${submitter}, and for the time it took. We’re not adding it to the store:\n\n${reason}\n\nYou’re welcome to submit again if that changes.`)
+              if (isPr) await github.rest.pulls.update({owner, repo, pull_number: number, state: 'closed'})
+              else await github.rest.issues.update({owner, repo, issue_number: number, state: 'closed', state_reason: 'not_planned'})
+              return
+            }
+
+            if (cmd === '/accept') {
+              await label('accepted', pending)
+              return say(`Thanks @${submitter}! This is accepted: we’ll package it and link the pull request here. You’ll be credited as the submitter.`)
+            }
+
+            // /approve: only when the pull request's checks have all passed on its latest commit.
+            const {data: pr} = await github.rest.pulls.get({owner, repo, pull_number: number})
+            const {data: runs} = await github.rest.checks.listForRef({owner, repo, ref: pr.head.sha, per_page: 100})
+            const checks = runs.check_runs.filter((r) => r.name !== 'command' && r.name !== 'welcome')
+            const validate = checks.filter((r) => r.name === 'validate')
+            if (!validate.length || validate.some((r) => r.status !== 'completed')) return say('The checks haven’t finished on the latest commit yet. Try `/approve` again in a minute.')
+            const failed = checks.filter((r) => r.status === 'completed' && !['success', 'skipped', 'neutral'].includes(r.conclusion))
+            if (failed.length) return say(`Can’t approve yet: ${failed.map((r) => r.name).join(', ')} didn’t pass on the latest commit.`)
+            await github.rest.pulls.merge({owner, repo, pull_number: number, merge_method: 'squash', sha: pr.head.sha, commit_title: `${pr.title} (#${number})`})
+            await label('approved', pending)
+            await say(`Approved by @${actor} and live! 🎉 Thank you, @${submitter}. It shows up in every App Store with Modc added within the hour, or right away with **Check for new apps**.`)
