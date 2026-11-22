@@ -1,0 +1,80 @@
+name: Submit an app
+description: Suggest an app for the Modc App Store. We'll package it, or help you open a pull request.
+title: "App: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for submitting an app! Fill in what you know. If you can write the two files yourself,
+        a pull request is faster; [CONTRIBUTING.md](https://github.com/TouchWorkStation/Modc-app-store/blob/main/CONTRIBUTING.md) shows how.
+  - type: input
+    id: name
+    attributes:
+      label: App name
+      placeholder: Notes
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Project website or repository
+      placeholder: https://github.com/someone/notes
+    validations:
+      required: true
+  - type: input
+    id: image
+    attributes:
+      label: Container image, with a version
+      description: The project's official image, pinned to a version.
+      placeholder: ghcr.io/someone/notes:2.3.1
+    validations:
+      required: true
+  - type: input
+    id: web
+    attributes:
+      label: Web page port inside the container
+      placeholder: "8080"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What it does
+      description: Two or three sentences for the App Store page.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [files, media, photography, social, finance, automation, networking, developer, ai, gaming, crypto]
+    validations:
+      required: true
+  - type: textarea
+    id: compose
+    attributes:
+      label: Example docker-compose.yml (optional)
+      description: The project's own example is fine. Paste it, or link to it.
+      render: yaml
+  - type: textarea
+    id: access
+    attributes:
+      label: Does it need more than a normal container?
+      description: For example the server's network, a USB or video device, or a folder outside its own data. Say what and why.
+  - type: dropdown
+    id: role
+    attributes:
+      label: You are
+      options: [The app's developer, A user of the app]
+    validations:
+      required: true
+  - type: checkboxes
+    id: ok
+    attributes:
+      label: Before you submit
+      options:
+        - label: The app's license allows it to be listed and run this way.
+          required: true
+        - label: It doesn't need access to the container engine (docker.sock).
+          required: true

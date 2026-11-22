@@ -1,0 +1,30 @@
+name: Validate apps
+
+# Checks every listing on pushes to main and on every pull request. Errors fail the run.
+# The official TouchWorkStation App Store is fetched so an app here can't reuse one of its ids or ports.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: TouchWorkStation/app-store
+          path: .official
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: The validator's own tests
+        run: npm test
+      - name: Check every app
+        run: node scripts/validate.mjs --warnings --official .official
