@@ -102,14 +102,18 @@ aren't already used by the official store.
 ## 5. Try it on your server
 
 1. Push your branch to your fork.
-2. In Omarchy Server, go to **App Store › Stores**, paste your fork's address under **Add by link**, and choose **Add**.
+2. In Omarchy Server (0.9.62 or newer), go to **App Store › Stores** and paste your branch's address under
+   **Add by link**: `https://github.com/<you>/Modc-app-store/tree/<your-branch>`.
 3. Install the app, open it, and check that it starts and keeps its data after **Restart**.
-4. Remove your fork's store again when you're done (**Stores › Remove**).
+4. Uninstall it and remove that store again when you're done (**Stores › Remove**).
+
+Once your pull request is open, its own address works the same way.
 
 ## 6. Open the pull request
 
-Fill in the checklist. A maintainer will review it, try it, and merge it, or comment with what needs changing.
-Thanks for your submission!
+Fill in the checklist. It's labelled **pending review**, and a maintainer reviews it, tries it, and approves it
+(it goes live), asks for changes, or declines it with the reason. See [REVIEWING.md](REVIEWING.md) for what we
+look at. Thanks for your submission!
 
 ## Can't write the files?
 
