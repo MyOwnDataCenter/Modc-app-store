@@ -1,19 +1,19 @@
 # Modc App Store
 
-Community-submitted apps for [Omarchy Server](https://github.com/TouchWorkStation/omarchy-server).
+Community-submitted apps for [My Own Data Center](https://github.com/MyOwnDataCenter/server).
 
-The [TouchWorkStation App Store](https://github.com/TouchWorkStation/app-store) is the official store: every app
-there is packaged and tested by TouchWorkStation. **Modc is where anyone can submit an app.** Submissions are
+The [My Own Data Center App Store](https://github.com/MyOwnDataCenter/app-store) is the official store: every app
+there is packaged and tested by My Own Data Center. **Modc is where anyone can submit an app.** Submissions are
 checked automatically and reviewed before they're merged. Apps that prove themselves here can move to the official
 store.
 
 ## Add this store to your server
 
-In Omarchy Server: **App Store › Stores**, then **Add** next to Modc under Suggested. Or paste
-`https://github.com/TouchWorkStation/Modc-app-store` under **Add by link**. Only the server's owner can add a store.
+In My Own Data Center: **App Store › Stores**, then **Add** next to Modc under Suggested. Or paste
+`https://github.com/MyOwnDataCenter/Modc-app-store` under **Add by link**. Only the server's owner can add a store.
 
 Community apps aren't tested as closely as the official store's. Like every app, they run as you, not as root, and
-Omarchy Server lists any extra access an app asks for (the server's network, a device, a folder) and installs it
+My Own Data Center lists any extra access an app asks for (the server's network, a device, a folder) and installs it
 only after you allow it.
 
 ## Submit an app
@@ -22,7 +22,7 @@ There are two ways:
 
 * **Open a pull request** with the app's two files. This is the fastest way.
   [CONTRIBUTING.md](CONTRIBUTING.md) shows what goes in them and how to test on your own server first.
-* **Fill in the form**: [Submit an app](https://github.com/TouchWorkStation/Modc-app-store/issues/new?template=submit-app.yml).
+* **Fill in the form**: [Submit an app](https://github.com/MyOwnDataCenter/Modc-app-store/issues/new?template=submit-app.yml).
   Tell us the app, its image and its port, and someone will package it or help you open the pull request.
 
 ## What gets in
@@ -54,4 +54,4 @@ listing. Maintainers: see [REVIEWING.md](REVIEWING.md).
 ## Removing an app
 
 If an app stops working, its image disappears, or a security problem is found, it's removed here. Servers keep
-running copies already installed. To report a problem with an app, [open an issue](https://github.com/TouchWorkStation/Modc-app-store/issues/new).
+running copies already installed. To report a problem with an app, [open an issue](https://github.com/MyOwnDataCenter/Modc-app-store/issues/new).

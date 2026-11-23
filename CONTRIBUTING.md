@@ -6,7 +6,7 @@ and how to try your app on your own server before you open a pull request.
 ## 1. Make the folder
 
 Pick an `id`: lowercase letters, numbers and dashes, such as `notes` or `field-notes`. It can't be one the
-[official store](https://github.com/TouchWorkStation/app-store) already uses. Make a folder with that name:
+[official store](https://github.com/MyOwnDataCenter/app-store) already uses. Make a folder with that name:
 
 ```
 notes/
@@ -16,7 +16,7 @@ notes/
 
 ## 2. `docker-compose.yml`
 
-A plain Docker Compose file. Omarchy Server fills in the `${...}` values when it installs the app.
+A plain Docker Compose file. My Own Data Center fills in the `${...}` values when it installs the app.
 
 ```yaml
 services:
@@ -30,11 +30,11 @@ services:
       - ${APP_DATA_DIR}/data:/data        # everything the app keeps goes under APP_DATA_DIR
 ```
 
-You don't need a `ports:` section for the web page: Omarchy Server opens the port in `omarchy-app.yml` and puts
+You don't need a `ports:` section for the web page: My Own Data Center opens the port in `omarchy-app.yml` and puts
 its own sign-in in front of the app. Add `ports:` only for something that isn't a web page, such as a sync
 protocol, and list those ports in `openPorts:` (below).
 
-### Values Omarchy Server fills in
+### Values My Own Data Center fills in
 
 | Value | What it is |
 | --- | --- |
@@ -102,7 +102,7 @@ aren't already used by the official store.
 ## 5. Try it on your server
 
 1. Push your branch to your fork.
-2. In Omarchy Server (0.9.62 or newer), go to **App Store › Stores** and paste your branch's address under
+2. In My Own Data Center (0.9.62 or newer), go to **App Store › Stores** and paste your branch's address under
    **Add by link**: `https://github.com/<you>/Modc-app-store/tree/<your-branch>`.
 3. Install the app, open it, and check that it starts and keeps its data after **Restart**.
 4. Uninstall it and remove that store again when you're done (**Stores › Remove**).
@@ -117,5 +117,5 @@ look at. Thanks for your submission!
 
 ## Can't write the files?
 
-[Fill in the form](https://github.com/TouchWorkStation/Modc-app-store/issues/new?template=submit-app.yml)
+[Fill in the form](https://github.com/MyOwnDataCenter/Modc-app-store/issues/new?template=submit-app.yml)
 instead, and someone will package it.

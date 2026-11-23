@@ -17,8 +17,8 @@ workflow does the merging.
    * `extraAccess:` is believable, and the app can't work without it;
    * data stays under `${APP_DATA_DIR}`; secrets come from `${APP_PASSWORD}` / `${APP_SEED}`, never written in;
    * the description is accurate and the icon is the app's own.
-3. **Try it.** On an Omarchy Server: **App Store › Stores › Add by link**, paste the pull request's address
-   (`https://github.com/TouchWorkStation/Modc-app-store/pull/<number>`), install the app, open it, restart it,
+3. **Try it.** On a My Own Data Center: **App Store › Stores › Add by link**, paste the pull request's address
+   (`https://github.com/MyOwnDataCenter/Modc-app-store/pull/<number>`), install the app, open it, restart it,
    and check its data is still there. Then uninstall it and remove that store.
 4. **Decide**, with a comment on the pull request:
 
@@ -45,5 +45,5 @@ The commands work for people with write access or more. Anyone else gets a polit
 ## Moving an app to the official store
 
 When an app here has been reliable for a while, offer it to the
-[official store](https://github.com/TouchWorkStation/app-store): copy its folder there with a new `port` if
+[official store](https://github.com/MyOwnDataCenter/app-store): copy its folder there with a new `port` if
 needed, keep `submitter:`, and remove it here once the official listing is live.

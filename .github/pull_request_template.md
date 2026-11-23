@@ -10,7 +10,7 @@
 - [ ] Data is kept under `${APP_DATA_DIR}`; nothing else on the server is mounted unless explained in `extraAccess:`
 - [ ] No access to the container engine (`docker.sock`)
 - [ ] `npm run validate` passes
-- [ ] I installed it on Omarchy Server (App Store › Stores › Add by link, with my fork's address) and it opened
+- [ ] I installed it on My Own Data Center (App Store › Stores › Add by link, with my fork's address) and it opened
 - [ ] The app's license allows it to be listed here
 
 ### Anything a reviewer should know?

@@ -3,7 +3,7 @@ name: Review
 # Every submission waits for a maintainer before it goes live (an app is live once it's on main).
 #
 # A new pull request is labelled "pending review" and gets a comment with a link that installs it on an
-# Omarchy Server exactly as submitted. A maintainer (write access or more) then comments:
+# My Own Data Center exactly as submitted. A maintainer (write access or more) then comments:
 #   /approve            merges it, once the checks have passed: it's in every App Store within the hour
 #   /changes <what>     asks the submitter for changes
 #   /deny <why>         closes it, with the reason
@@ -52,7 +52,7 @@ jobs:
                   '2. A maintainer reviews the files and installs the app on a test server.',
                   '3. It’s approved and goes live in every App Store, or we’ll say what needs changing.',
                   '',
-                  `**To try it on your own Omarchy Server:** App Store › Stores › **Add by link**, paste \`${link}\`, then install the app. Remove that store again when you’re done.`,
+                  `**To try it on your own My Own Data Center:** App Store › Stores › **Add by link**, paste \`${link}\`, then install the app. Remove that store again when you’re done.`,
                 ].join('\n')
               : [
                   `Thanks for submitting an app, @${item.user.login}! 🎉`,

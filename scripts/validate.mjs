@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Checks every app in the Modc App Store: node scripts/validate.mjs [--warnings] [--strict] [--root DIR]
 //
-// Based on the TouchWorkStation App Store's checks, plus the rules for community submissions (see
+// Based on the My Own Data Center App Store's checks, plus the rules for community submissions (see
 // CONTRIBUTING.md): images pinned to a version, no access to the container engine, a written reason for
 // any other extra access, and who submitted it.
 //
@@ -91,11 +91,11 @@ for (const app of apps) {
 		if (listing.id !== app) error(app, f, `id is ${JSON.stringify(listing.id)} but the folder is ${app}; they must match`)
 		for (const key of ['name', 'tagline', 'description', 'category', 'icon']) if (!text(listing[key])) error(app, f, `${key} is missing`)
 		if (!Number.isInteger(listing.port) || listing.port < 1 || listing.port > 65535) error(app, f, `port should be a number from 1 to 65535, not ${JSON.stringify(listing.port)}`)
-		// path is optional: Omarchy Server opens the front page when it's left out.
+		// path is optional: My Own Data Center opens the front page when it's left out.
 		if (listing.path !== undefined && typeof listing.path !== 'string') error(app, f, `path should be text, not ${JSON.stringify(listing.path)}`)
 
-		// An older-style app names its web port in an app_proxy service instead; Omarchy Server reads that too.
-		if (listing.web === undefined && !(services && 'app_proxy' in services)) warn('no-web', app, 'has no web: block, so Omarchy Server cannot put its sign-in in front of the app')
+		// An older-style app names its web port in an app_proxy service instead; My Own Data Center reads that too.
+		if (listing.web === undefined && !(services && 'app_proxy' in services)) warn('no-web', app, 'has no web: block, so My Own Data Center cannot put its sign-in in front of the app')
 		else if (listing.web === undefined) {
 			// covered by app_proxy above
 		} else if (!text(listing.web?.service) || !Number.isInteger(listing.web?.port)) error(app, f, 'web: needs a service name and a port number')
@@ -127,7 +127,7 @@ for (const app of apps) {
 for (const [name, list] of names) if (list.length > 1) warn('same-name', list.join(', '), `share the name ${JSON.stringify(name)}`)
 for (const [port, list] of ports) if (list.length > 1) error(list.join(', '), 'omarchy-app.yml', `share port ${port}; each app needs its own`)
 
-// --official DIR: a copy of the TouchWorkStation App Store. An app here may not reuse one of its ids or ports.
+// --official DIR: a copy of the My Own Data Center App Store. An app here may not reuse one of its ids or ports.
 const officialFlag = process.argv.indexOf('--official')
 if (officialFlag > 0) {
 	const off = process.argv[officialFlag + 1]

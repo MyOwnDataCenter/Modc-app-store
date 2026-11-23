@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for submitting an app! Fill in what you know. If you can write the two files yourself,
-        a pull request is faster; [CONTRIBUTING.md](https://github.com/TouchWorkStation/Modc-app-store/blob/main/CONTRIBUTING.md) shows how.
+        a pull request is faster; [CONTRIBUTING.md](https://github.com/MyOwnDataCenter/Modc-app-store/blob/main/CONTRIBUTING.md) shows how.
   - type: input
     id: name
     attributes:
