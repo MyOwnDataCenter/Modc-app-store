@@ -4,7 +4,7 @@ name: "Noop"
 tagline: "Your own AI team of Claude Code and Codex agents"
 icon: https://cdn.jsdelivr.net/gh/huacnlee/noop@v1.0.9/app/icon.png
 category: ai
-version: "1.0.9"
+version: "1.0.9-1"
 port: 8737
 web:
   service: web
@@ -15,7 +15,7 @@ description: >-
   really needs you, with a short list of options you answer in one tap.
 
   This runs Noop on its own, with no Cloudflare account: everything stays in the app's folder on this server.
-  On first open, enter the password shown on this page as the hub token. Then sign Noop in to your AI tools:
+  On first open, sign in with the password shown on this page. Then sign Noop in to your AI tools:
   run `claude setup-token` on any computer and paste the token under Settings › Keys (or add an Anthropic or
   OpenAI API key there).
 developer: "Jason Lee (huacnlee)"
