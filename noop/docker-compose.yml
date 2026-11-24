@@ -1,0 +1,11 @@
+services:
+  web:
+    image: ghcr.io/nickpstone/noop:1.0.9
+    restart: unless-stopped
+    hostname: noop                        # Noop names its primary after the host; keep it stable across restarts
+    user: "${PUID}:${PGID}"               # Claude Code won't run its agents as root
+    environment:
+      TZ: ${TZ}
+      NOOP_TOKEN: ${APP_PASSWORD}         # the web chat's sign-in token, shown on the app's page
+    volumes:
+      - ${APP_DATA_DIR}/data:/data        # Noop's data, memory, tasks and the Claude/Codex logins

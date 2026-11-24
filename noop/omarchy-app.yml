@@ -1,0 +1,25 @@
+manifestVersion: 1
+id: noop
+name: "Noop"
+tagline: "Your own AI team of Claude Code and Codex agents"
+icon: https://cdn.jsdelivr.net/gh/huacnlee/noop@v1.0.9/app/icon.png
+category: ai
+version: "1.0.9"
+port: 8737
+web:
+  service: web
+  port: 8787
+description: >-
+  Noop runs a small team of Claude Code and Codex agents on your server. Give it a goal in one sentence: it
+  breaks the work down, runs it in parallel and comes back with results, and only asks you when something
+  really needs you, with a short list of options you answer in one tap.
+
+  This runs Noop on its own, with no Cloudflare account: everything stays in the app's folder on this server.
+  On first open, enter the password shown on this page as the hub token. Then sign Noop in to your AI tools:
+  run `claude setup-token` on any computer and paste the token under Settings › Keys (or add an Anthropic or
+  OpenAI API key there).
+developer: "Jason Lee (huacnlee)"
+website: https://huacnlee.github.io/noop/
+repo: https://github.com/huacnlee/noop
+submitter: "nickpstone"
+deterministicPassword: true
