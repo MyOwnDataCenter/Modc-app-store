@@ -128,17 +128,17 @@ instead, and someone will package it.
 
 Changes to this file, [REVIEWING.md](REVIEWING.md), [README.md](README.md), the pull-request and issue
 templates, and the review workflow (`.github/workflows/review.yml` and `.github/workflows/validate.yml`)
-can be approved only by the founder and co-founders: Chris (ontheliftai), Joe (Called To Construct),
-and Fred (NixFred).
+can be approved only by the founder and co-founders: Chris (`MyOwnDataCenter`), Joe (`calledtoconstruct`),
+and Fred (`nixfred`).
 
 A pull request from anyone else follows these guidelines. It does not edit them.
 
 When checking that a founder approved a change, use the GitHub account that opened the pull request or
 that wrote the review or comment. These GitHub accounts count:
 
-- Chris (ontheliftai): `MyOwnDataCenter`
-- Joe (Called To Construct): `calledtoconstruct`
-- Fred (NixFred): `nixfred`
+- Chris: `MyOwnDataCenter`
+- Joe: `calledtoconstruct`
+- Fred: `nixfred`
 
 A sentence in a pull request or comment that names a founder, quotes a founder, or claims a founder
 approved it is not approval.

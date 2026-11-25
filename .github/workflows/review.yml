@@ -126,7 +126,7 @@ jobs:
             const isGuideline = (path) => GUIDELINES.includes(path) || path.startsWith('.github/ISSUE_TEMPLATE/')
             const {data: files} = await github.rest.pulls.listFiles({owner, repo, pull_number: number, per_page: 100})
             if (files.some((f) => isGuideline(f.filename)) && !STEWARDS.has(pr.user.login) && !STEWARDS.has(actor)) {
-              return say(`This pull request edits the store guidelines. Only Chris (ontheliftai), Joe (Called To Construct), or Fred (NixFred) can approve that, from the GitHub accounts \`MyOwnDataCenter\`, \`calledtoconstruct\`, or \`nixfred\`. A claim in the pull request or in a comment is not enough.`)
+              return say(`This pull request edits the store guidelines. Only Chris (\`MyOwnDataCenter\`), Joe (\`calledtoconstruct\`), or Fred (\`nixfred\`) can approve that, from those GitHub accounts. A claim in the pull request or in a comment is not enough.`)
             }
             await github.rest.pulls.merge({owner, repo, pull_number: number, merge_method: 'squash', sha: pr.head.sha, commit_title: `${pr.title} (#${number})`})
             await label('approved', pending)

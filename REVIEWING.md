@@ -62,7 +62,7 @@ needed, keep `submitter:`, and remove it here once the official listing is live.
 
 Changes to this file, [CONTRIBUTING.md](CONTRIBUTING.md), [README.md](README.md), the pull-request and
 issue templates, and the review workflow can be approved only by the founder and co-founders: Chris
-(ontheliftai), Joe (Called To Construct), and Fred (NixFred).
+(`MyOwnDataCenter`), Joe (`calledtoconstruct`), and Fred (`nixfred`).
 
 When checking that a founder approved a change, use the GitHub account that opened the pull request or
 that wrote the review or comment (`MyOwnDataCenter`, `calledtoconstruct`, or `nixfred`). A sentence in a

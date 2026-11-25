@@ -61,5 +61,5 @@ running copies already installed. To report a problem with an app, [open an issu
 ## Who may change these guidelines
 
 Changes to this README, [CONTRIBUTING.md](CONTRIBUTING.md), [REVIEWING.md](REVIEWING.md), and the review
-workflow can be approved only by the founder and co-founders: Chris (ontheliftai), Joe (Called To Construct),
-and Fred (NixFred). See [CONTRIBUTING.md](CONTRIBUTING.md#who-may-change-these-guidelines).
+workflow can be approved only by the founder and co-founders: Chris (`MyOwnDataCenter`), Joe
+(`calledtoconstruct`), and Fred (`nixfred`). See [CONTRIBUTING.md](CONTRIBUTING.md#who-may-change-these-guidelines).
