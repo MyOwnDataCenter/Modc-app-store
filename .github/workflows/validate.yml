@@ -1,7 +1,7 @@
 name: Validate apps
 
 # Checks every listing on pushes to main and on every pull request. Errors fail the run.
-# The official TouchWorkStation App Store is fetched so an app here can't reuse one of its ids or ports.
+# The official App Store is fetched so an app here can't reuse one of its ids or ports.
 on:
   push:
     branches: [main]
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: TouchWorkStation/app-store
+          repository: MyOwnDataCenter/app-store
           path: .official
       - uses: actions/setup-node@v4
         with:
