@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for submitting an app! Fill in what you know. If you can write the two files yourself,
-        a pull request is faster; [CONTRIBUTING.md](https://github.com/TouchWorkStation/Modc-app-store/blob/main/CONTRIBUTING.md) shows how.
+        a pull request is faster; [CONTRIBUTING.md](https://github.com/MyOwnDataCenter/Modc-app-store/blob/main/CONTRIBUTING.md) shows how.
   - type: input
     id: name
     attributes:
@@ -26,7 +26,7 @@ body:
     id: image
     attributes:
       label: Container image, with a version
-      description: The project's official image, pinned to a version.
+      description: A published image, pinned to a version. The project's official image, or one you built.
       placeholder: ghcr.io/someone/notes:2.3.1
     validations:
       required: true
@@ -55,7 +55,7 @@ body:
     id: compose
     attributes:
       label: Example docker-compose.yml (optional)
-      description: The project's own example is fine. Paste it, or link to it.
+      description: The project's example, or yours. Paste it, or link to it.
       render: yaml
   - type: textarea
     id: access

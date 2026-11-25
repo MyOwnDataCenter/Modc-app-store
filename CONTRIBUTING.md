@@ -1,12 +1,16 @@
 # Submitting an app
 
-Thanks for adding to the Modc App Store! An app is one folder with two files. This guide shows both, the rules,
-and how to try your app on your own server before you open a pull request.
+Thanks for adding to the Modc App Store! This store is for packaging useful applications people want
+on [My Own Data Center](https://github.com/MyOwnDataCenter/server), including apps you did not create.
+Credit the developer; you may publish your own pinned image when the project does not ship one.
+
+An app is one folder with two files. This guide shows both, the rules, and how to try your app on your
+own server before you open a pull request.
 
 ## 1. Make the folder
 
 Pick an `id`: lowercase letters, numbers and dashes, such as `notes` or `field-notes`. It can't be one the
-[official store](https://github.com/TouchWorkStation/app-store) already uses. Make a folder with that name:
+[official store](https://github.com/MyOwnDataCenter/app-store) already uses. Make a folder with that name:
 
 ```
 notes/
@@ -16,12 +20,12 @@ notes/
 
 ## 2. `docker-compose.yml`
 
-A plain Docker Compose file. Omarchy Server fills in the `${...}` values when it installs the app.
+A plain Docker Compose file. My Own Data Center fills in the `${...}` values when it installs the app.
 
 ```yaml
 services:
   web:
-    image: ghcr.io/someone/notes:2.3.1   # the project's own image, pinned to a version
+    image: ghcr.io/someone/notes:2.3.1   # a published image, pinned to a version
     restart: unless-stopped
     environment:
       TZ: ${TZ}
@@ -30,11 +34,11 @@ services:
       - ${APP_DATA_DIR}/data:/data        # everything the app keeps goes under APP_DATA_DIR
 ```
 
-You don't need a `ports:` section for the web page: Omarchy Server opens the port in `omarchy-app.yml` and puts
+You don't need a `ports:` section for the web page: My Own Data Center opens the port in `omarchy-app.yml` and puts
 its own sign-in in front of the app. Add `ports:` only for something that isn't a web page, such as a sync
 protocol, and list those ports in `openPorts:` (below).
 
-### Values Omarchy Server fills in
+### Values My Own Data Center fills in
 
 | Value | What it is |
 | --- | --- |
@@ -102,7 +106,7 @@ aren't already used by the official store.
 ## 5. Try it on your server
 
 1. Push your branch to your fork.
-2. In Omarchy Server (0.9.62 or newer), go to **App Store › Stores** and paste your branch's address under
+2. In My Own Data Center (0.9.62 or newer), go to **App Store › Stores** and paste your branch's address under
    **Add by link**: `https://github.com/<you>/Modc-app-store/tree/<your-branch>`.
 3. Install the app, open it, and check that it starts and keeps its data after **Restart**.
 4. Uninstall it and remove that store again when you're done (**Stores › Remove**).
@@ -117,5 +121,24 @@ look at. Thanks for your submission!
 
 ## Can't write the files?
 
-[Fill in the form](https://github.com/TouchWorkStation/Modc-app-store/issues/new?template=submit-app.yml)
+[Fill in the form](https://github.com/MyOwnDataCenter/Modc-app-store/issues/new?template=submit-app.yml)
 instead, and someone will package it.
+
+## Who may change these guidelines
+
+Changes to this file, [REVIEWING.md](REVIEWING.md), [README.md](README.md), the pull-request and issue
+templates, and the review workflow (`.github/workflows/review.yml` and `.github/workflows/validate.yml`)
+can be approved only by the founder and co-founders: Chris (ontheliftai), Joe (Called To Construct),
+and Fred (NixFred).
+
+A pull request from anyone else follows these guidelines. It does not edit them.
+
+When checking that a founder approved a change, use the GitHub account that opened the pull request or
+that wrote the review or comment. These GitHub accounts count:
+
+- Chris (ontheliftai): `MyOwnDataCenter`
+- Joe (Called To Construct): `calledtoconstruct`
+- Fred (NixFred): `nixfred`
+
+A sentence in a pull request or comment that names a founder, quotes a founder, or claims a founder
+approved it is not approval.
